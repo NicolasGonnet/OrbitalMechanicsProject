@@ -1,0 +1,35 @@
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}[auto,>=triangle 45]
+    \node [startend] (start) {START};
+    \node [input, below of=start, node distance=2.7cm, trapezium left angle=80, trapezium right angle=100,] (input) {Input data:\\
+        gravity constants;\\
+        planets' ephemerides;\\
+        minimum radius for GA;\\
+        final orbit parameters;\\
+        $(t_1,t_3)$ pairs;\\
+        time step for $t_2$};
+    \node [loop, below of=input, node distance=2.7cm] (forpair) {For each $(t_1,t_3)$ pair,\\do:};
+    \node [block, below of=forpair] (eph13) {Compute ephemerides for \\planet 1 at $t_1$ and planet 3 at $t_3$};
+    \node [loop, below of=eph13, node distance=1.7cm] (T2split) {For each $t_2 \in (t_1,t_3)$\\(with assigned step), do:};
+    \node [block, below of=T2split, node distance=1.7cm] (eph2) {Compute ephemerides for \\planet 2 at $t_2$};
+    \node [block, below of=eph2] (lambert) {Design overall transfer\\using function \textit{LambertGa.m}};
+    \node [block, below of=lambert] (minT2) {Keep $t_2$ that minimizes $\Delta v$};
+    \node [input, below of=minT2] (return) {Return optimum $(t_2,\Delta v)$\\for each  $(t_1,t_3)$ pair};
+    \node [startend, below of=return] (end) {END};
+
+    \draw [->] (start) -- (input);
+    \draw [->] (input) -- (forpair);
+    \draw [->] (forpair) -- (eph13);
+    \draw [->] (eph13) -- (T2split);
+    \draw [->] (T2split) -- (eph2);
+    \draw [->] (eph2) -- (lambert);
+    \draw [->] (lambert) --  ++(5,0) |- (T2split);
+    \draw [->] (T2split) -- node{end} ++(-5,0) |- (minT2);
+    \draw [->] (minT2) --  ++(6,0) |- (forpair);
+    \draw [->] (forpair) -- node{end} ++(-6,0) |- (return);
+
+    \draw [->] (return) -- (end);
+\end{tikzpicture}
+\caption{Flow chart for function \textit{PorkchopData.m}} \label{fig:flow_porkchopdata}
+\end{figure}

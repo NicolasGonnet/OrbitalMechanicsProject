@@ -1,0 +1,77 @@
+FIRST PORKCHOP
+T1 from 02-Jan-2017 00:00:00 to 31-Dec-2024 00:00:00
+T3 from 02-Jan-2017 00:00:00 to 31-Dec-2024 00:00:00
+Step for T1 and T3:  24d 08h 00m 00s
+Maximum step for T2: 4d 20h 47m 60s
+Minimum deltav = 17.2397km/s, found at:
+T1: 26-Jan-2018 08:00:00
+T2: 28-May-2018 00:00:00
+T3: 14-Nov-2018 08:00:00
+TOF from 1 to 2: 121d 16h 00m 00s
+TOF from 2 to 3: 170d 08h 00m 00s
+ 
+ZOOMED PORKCHOP 1/2
+T1 from 02-Jan-2018 00:00:00 to 19-Feb-2018 16:00:00
+T3 from 21-Oct-2018 00:00:00 to 08-Dec-2018 16:00:00
+Step for T1 and T3:  2d 10h 23m 60s
+Maximum step for T2: 1d 05h 11m 60s
+Minimum deltav = 15.1321km/s, found at:
+T1: 02-Feb-2018 15:12:00
+T2: 03-Jun-2018 02:00:00
+T3: 24-Nov-2018 01:36:00
+TOF from 1 to 2: 120d 10h 48m 00s
+TOF from 2 to 3: 173d 23h 36m 00s
+ 
+ZOOMED PORKCHOP 2/2
+T1 from 31-Jan-2018 04:48:00 to 05-Feb-2018 01:36:00
+T3 from 21-Nov-2018 15:12:00 to 26-Nov-2018 12:00:00
+Step for T1 and T3:  0d 05h 50m 24s
+Maximum step for T2: 0d 02h 55m 12s
+Minimum deltav = 15.1211km/s, found at:
+T1: 02-Feb-2018 09:21:36
+T2: 03-Jun-2018 06:06:45
+T3: 25-Nov-2018 06:48:00
+TOF from 1 to 2: 120d 16h 38m 24s
+TOF from 2 to 3: 173d 19h 29m 14s
+ 
+***********************************
+** Detailed optimum informations **
+***********************************
+ 
+*           Powered dVs           *
+- dV required for first interplanetary orbit insertion:
+  dV1 = 10.5525 km/s
+- dV required for GA closure:
+  dV2 = 0.00025655 km/s
+- dV required for orbit closure at arrival planet:
+  dV3 = 4.5684 km/s
+- Total: (dV1+dV2+dV3)
+  dVT = 15.1211 km/s
+ 
+*         Gravity assist          *
+- Pericenter radius:  Rp = 9308.7639 km
+- Total dV of GA:     dVGATOT  = 5.6609 km/s
+- Free dV of GA:      dVGAFREE = 5.6607 km/s
+
+*  Interplanetary orbit 1 params  *
+  a      = 90944785.5415 km
+  e      = 0.26218
+  i      = 5.5303 °
+  Omega  = 18.6676 °
+  omega  = 286.5034 °
+  thetaI = 334.2346 °
+  thetaF = 575.7956 °
+ 
+*  Interplanetary orbit 2 params  *
+  a      = 120012681.937 km
+  e      = 0.23212
+  i      = 3.415 °
+  Omega  = 62.722 °
+  omega  = 174.5087 °
+  thetaI = 283.8506 °
+  thetaF = 545.4524 °
+ 
+*       Arrival and closure       *
+- dV from hyperbola to circle:  dV3_1  = 3.6299 km/s
+- dV from circle to ellipse:    dV3_2  = 0.93853 km/s
+- total arrival dv:             dV3    = 4.5684 km/s

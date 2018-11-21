@@ -1,0 +1,231 @@
+\section{Interplanetary transfer}
+
+The overall transfer is designed joining the following orbits,
+that are designed according to the Restricted Two Body Problem,
+with different central bodies:
+\begin{enumerate}
+	\item Lambert arc from Mercury to Venus (central body: Sun)
+	\item gravity assist around Venus (central body: Venus)
+	\item Lambert arc from Venus to Earth (central body: Sun)
+	\item capture and final orbit insertion  (central body: Earth)
+\end{enumerate}
+The cost of the transfer is computed as the sum of:
+
+\begin{itemize}
+	\item $\Delta v_1$, required to insert the spacecraft into the departure orbit from Mercury
+	\item $\Delta v_2$, required to join the hyperbolas around Venus
+	\item $\Delta v_3$, required to move from the arrival hyberbola to the circular orbit
+	\item $\Delta v_4$, required to move from the circular orbit to the final orbit
+\end{itemize}
+The overall $\Delta v$ is a function of the relative positions of the planets,
+therefore it depends on the moment at which the maneuvers occur.
+
+We define the following time instants:
+\begin{itemize}
+	\item $t_1$ for the departure from Mercury
+	\item $t_2$ for the fly-by around Venus
+	\item $t_3$ for the arrival at the Earth
+\end{itemize}
+Accordingly, it is possible to write $\Delta v=\Delta v(t_1,t_2,t_3)$ and to identify
+the $(t_1,t_2,t_3)$ triplet for which $\Delta v$ is minimum.
+
+In order to obtain a 2D representation,
+we represent it only as a function of $t_1$ and $t_3$,
+whereas $t_2 \in (t_1,t_3)$ is chosen in order to minimize the value of $\Delta v$ at fixed $(t_1,t_3)$:
+$$\Delta v^*(t_1,t_3) = \min_{t_2 \in (t_1,t_3)} \Delta v(t_1,t_2,t_3)$$
+This new function can be easily represented in what we call porkchop plot.
+
+The data for the porkchop plot is evaluated using the function \textit{PorkchopData.m} (fig.~\ref{fig:flow_porkchopdata}).
+As can be seen, the function is made of two nested cycles. The outermost computes $\Delta v^*(t_1,t_3)$ in the given plot range ($[t_{1,min},t_{1,max}]$,$[t_{3,min},t_{3,max}]$), while the innermost finds the minimizing $t_2$.
+
+\input{blocks/porkchopdata}
+
+
+\input{blocks/main}
+
+The generation of a high-resolution porkchop plot over the whole given range would require long computation time. For this reason, at first a low-resolution plot is drawn, then it is zoomed twice in the neighbourhood of the optimum with increased resolution.
+This procedure, executed by the {\it Main.m} script, is shown in fig.~\ref{fig:flow_main}.
+
+It is now possible to identify the overall minimum:
+$$\Delta v_{min}=\min_{(t_1,t_3)} \Delta v^*=\min_{(t_1,t_2,t_3)} \Delta v$$
+
+
+\subsection{Lambert's problem: From Mercury to Venus and from Venus to Earth}
+%The path described by the spacecraft in its motion is designed basing on the solution of the Lambert's problem through the given lambertsolver.m function.
+
+Position and velocity vectors of the planets in the Sun-centered reference system at given time instants is obtained using ephemerides, downloaded from the JPL website (\cite{ephemerides}).
+
+Knowing the departure and arrival planets' positions and the time of flight, the {\it lambertsolver.m} function is used to obtain the Keplerian parameters for the transfer orbit and, consequently, the departure and arrival velocity vectors ($\mathbf v_{dep}$,$\mathbf v_{arr}$).
+
+We are required to consider null relative velocity with respect to Mercury:
+$$\mathbf v_1^-=\mathbf v_{\mercury}(t_1)$$
+
+The velocity at the starting point of the Lambert arc, given by {\it lambertsolver.m}, is:
+$$\mathbf v_1^+=\mathbf v_{\mercury\rightarrow\venus,dep}$$
+
+Therefore, the first $\Delta v_1$ is:
+$$\Delta v_1 = \norm{\mathbf v_1^+ - \mathbf v_1^-}$$
+
+\subsection{Gravity assist around Venus}
+
+Knowing the absolute arrival and departure velocities at Venus (given by {\it lambertsolver.m}),
+it is possible to compute the hyperbolic excess velocities:
+\begin{align*}
+\mathbf v_{\infty,\venus}^-&=\mathbf v_{\mercury\rightarrow\venus,arr}-\mathbf v_{\venus}(t_2) \\
+\mathbf v_{\infty,\venus}^+&=\mathbf v_{\mercury\rightarrow\venus,dep}-\mathbf v_{\venus}(t_2)
+\end{align*}
+
+The pericenter radius that allows for the connection of the hyperbolas is found via numerical solutions.
+The maneuver is considered feasible if the pericenter falls at least \SI{100}{km} above the planet's surface.
+
+The cost of the maneuver is the difference between the pericenter velocities:
+
+$$\Delta v_2 = \abs{v_{p,\venus,dep} - v_{p,\venus,arr}}$$
+
+\subsection{Orbital capture around Earth}
+
+The spacecraft reaches Earth in a hyperbolic orbit with excess velocity:
+$$\mathbf v_{\infty,\oplus}^-=\mathbf v_{\venus\rightarrow\oplus,arr}-\mathbf v_{\oplus}(t_3)$$
+
+In order to inject the spacecraft in the final orbit, an orbital maneuver has to be designed.
+The arrival velocity vector can be freely shifted in order to obtain the desired pericenter radius,
+in particular it is moved so as to have the same pericenter distance of the final orbit.
+
+The two pericenters can now be connected with a circular orbit,
+that belongs to the plane defined by the arrival velocity vector and the final pericenter position vector.
+
+The cost of the maneuvers is therefore:
+\begin{align*}
+\Delta v_3 &= \norm{\mathbf v_{circular} - \mathbf v_{p,\oplus,arr}} \\
+\Delta v_4 &= \norm{\mathbf v_{p,final} - v_{p,circular}}
+\end{align*}
+
+The computation of $\Delta v_3$ and $\Delta v_4$ is done by the function {\it Arrival.m} (fig.~\ref{fig:flow_arrival}).
+\input{blocks/arrival}
+
+The computation of $\Delta v_1$ and $\Delta v_2$, and the summation of all the $\Delta v_{1,2,3,4}$ is done by the function {\it LambertGA.m} (fig.~\ref{fig:flow_lambertga}).)
+
+\input{blocks/lambertga}
+
+\clearpage
+
+\subsection{Results}
+The plots obtained are shown below.
+
+\begin{figure}[htp]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{porkchop_full_contour}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{porkchop_full_surface}
+	\end{subfigure}
+
+
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{porkchop_zoom1_contour}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{porkchop_zoom1_surface}
+	\end{subfigure}
+
+
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{porkchop_zoom2_contour}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{porkchop_zoom2_surface}
+	\end{subfigure}
+	\caption{Porkchop plots with increasing zoom}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=1.1\textwidth,trim={5cm 0 0 0},clip]{orbits_interplanetary}
+\caption{Interplanetary orbits (optimum solution)}
+\end{figure}
+\begin{figure}[htp]
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\textwidth,trim={4.5cm 0 0 0},clip]{Venus_GA}
+\caption{Gravity Assist (optimum solution)}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1.1\textwidth,trim={5cm 0 0 0},clip]{earth_arrival}
+\caption{Arrival orbital closure (optimum solution)}
+\end{subfigure}
+\caption{Planet-centered maneuvers detail}
+\end{figure}
+
+\clearpage
+The following plots are obtained without taking into account a lower boundary for the pericenter radius during the gravity assist (Venus radius plus \SI{100}{km}).
+
+\begin{figure}[htp]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{__porkchop_full_contour}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{__porkchop_full_surface}
+	\end{subfigure}
+
+
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{__porkchop_zoom1_contour}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{__porkchop_zoom1_surface}
+	\end{subfigure}
+
+
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{__porkchop_zoom2_contour}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{__porkchop_zoom2_surface}
+	\end{subfigure}
+	\caption{Porkchop plots with increasing zoom [no limit on pericenter radius]}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=1.1\textwidth,trim={5cm 0 0 0},clip]{__orbits_interplanetary}
+\caption{Interplanetary orbits (optimum solution) [no limit on pericenter radius]}
+\end{figure}
+\begin{figure}[htp]
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\textwidth,trim={4.5cm 0 0 0},clip]{__Venus_GA}
+\caption{Gravity Assist (optimum solution)}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1.1\textwidth,trim={5cm 0 0 0},clip]{__earth_arrival}
+\caption{Arrival orbital closure (optimum solution)}
+\end{subfigure}
+\caption{Planet-centered maneuvers detail [no limit on pericenter radius]}
+\end{figure}
+
+
+\clearpage
+Here is reported the detailed output of the code (taking into account the lower boundary for the pericenter radius around Venus):
+
+\noindent\rule{8cm}{0.4pt}
+
+\verbatiminput{matlaboutput.txt}
+
+\noindent\rule{8cm}{0.4pt}
+
+
+\clearpage

@@ -1,0 +1,55 @@
+
+\chapter{Mission description}
+\label{s:mission}
+
+In this work we wish to study a single gravity assist interplanetary trajectory that, starting from Mercury and passing for Venus, leads the satellite to a closed given orbit around Earth. The most important assumption adopted in the development of this project is to consider the linked conic approximation. This approach reduces the multi-body problem of the solar system into several different two-body problems. Each main attractor has its own sphere of influence where it is considered the only source of gravitational force.
+
+Afterward, considering the given operational orbit, starting from the date of arrival on Earth, an orbital perturbation analysis is conducted for both a short and a long period of time. The considered sources of perturbation are the solar pressure, the first zonal harmonic of Earth and the Sun and Moon gravitational field as third body influence. Also, the atmospheric drag effect is considered but, as shown later, it is possible to neglect its effects due to the extremely low density of the atmosphere at the operational orbit.
+
+The departure and arrival dates considered for the first low resolution porkchop plot are between January 2018 and December 2023.
+
+\section{Target planet data}
+The required operative orbit is around the Earth, the planet's features are:
+\begin{table}[h]
+\begin{tabular}{lcccccc}
+Mean equatorial radius 		&& R$_\oplus$ 			&& 6378			&& km \\
+Planetary constant 			&& $\mu $		&& 398600			&& km$^3$/$s^2$ \\
+First zonal harmonic 		&& $J_2 $		&& 1.08263E-3		&& - \\
+Orbital period 			&&$ T_v	$	&& 365.25			&& days \\	
+Atmospheric surface density 	&&$ \rho_0$ 		&& 1.217			&& kg/m$^3$ \\
+Atmosphere scale height 		&& H 			&& 8.5	 		&& km \\
+Mean solar flux 			&& $W_s$		&& 1367.6 			&& W/m$^2$ \\
+\end{tabular}
+\end{table}
+
+\section{Spacecraft data}
+The following assumptions have been considered about the spacecraft:
+\begin{itemize}
+\item the spacecraft shape is a cube;
+\item the direction normal to a cube face always coincides with the velocity vector support.
+\end{itemize}
+Next table shows the main spacecraft features chosen for the mission
+\begin{table}[!h]
+\begin{tabular}{lcccccc}
+Mass				&& m 				&& 2613.9386			&& kg\\
+Front area 			&& A 				&& 1.67062			&& m$^2$ \\
+Reflectivity coefficient 	&& $\varepsilon$	 	&&0.2 				&& -\\
+Ballistic coefficient		&&$ \beta $			&& 782.33			&& K$_g$/m$^2$
+\end{tabular}
+\label{SCf}
+\end{table}
+
+\section{Operational orbit data}
+The required orbit to achieve at the end of the interplanetary transfer is characterized by the following data:
+\begin{table}[h]
+\begin{tabular}{lcccccc}
+Pericenter heigth 			&&$ h_p $		&& 2792.591976		&& km \\
+Apocenter heigth			&& $h_a $		&& 5252.37472		&& km\\
+Inclination				&& i 			&& 326.96304			&& deg \\
+Ascending node right ascension	&&$ \Omega$ 		&& 98.493			&&deg\\
+Anomaly of the pericenter		&&$ \omega $		&& 81.28101			&&deg\\
+\end{tabular}
+\end{table}
+
+
+

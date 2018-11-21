@@ -1,0 +1,37 @@
+%function [dVT,dV1,dV2,dV3,Rp,VIa,VFa,VIb,VFb]=LambertGA(MU0,MUGA,MU3,R1,R2,R3,V1,V2,V3,T1,T2,T3,GALimit,RpGUESS,OrbitParams_final)
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}[auto,>=triangle 45]
+    \node [startend] (start) {START};
+    \node [input, below of=start, node distance=2.7cm, trapezium left angle=80, trapezium right angle=100,] (input) {Input data:\\
+        gravity constants;\\
+        maneuvers' times;\\
+        planets' positions and\\velocities at maneuvers' times;\\
+        minimum radius for GA;\\
+        final orbit parameters};
+    \node [block, below of=input, node distance=2.7cm] (lambert1) {Solve first Lambert problem\\from Mercury to Venus};
+    \node [block, below of=lambert1] (lambert2) {Solve second Lambert problem\\from Venus to Earth};
+    \node [block, below of=lambert2] (ga) {Connect hyperbolas at Venus (GA)\\computing pericenter radius};
+    \node [if, below of=ga] (isabove) {Is computed pericenter\\at least \SI{100}{km} above Venus surface?};
+    \node [block, below of=isabove, node distance=3cm] (firstminimum) {Solve orbit closure at Earth};
+    \node [input, below of=firstminimum, node distance=2.7cm] (return) {Return:\\
+    $\Delta v$ for each maneuver;\\
+    pericenter radius at GA;\\
+    Lambert arcs'\\initial and final velocities};
+    \node [block, right = 1cm of return, minimum width=5cm] (abort) {Abort (Return $NaN$)};
+    \node [startend, below of=return, node distance=2.7cm] (end) {END};
+
+    \draw [->] (start) -- (input);
+    \draw [->] (input) -- (lambert1);
+    \draw [->] (lambert1) -- (lambert2);
+    \draw [->] (lambert2) -- (ga);
+    \draw [->] (ga) -- (isabove);
+    \draw [->] (isabove) -- node{yes} (firstminimum);
+    \draw [->] (isabove.east) -- node{no}  (isabove.east -| abort.north) -- (abort);
+    \draw [->] (firstminimum) -- (return);
+    \draw [->] (return) -- (end);
+    \draw [->] (abort) |- (end);
+\end{tikzpicture}
+\caption{Flow chart for function \textit{LambertGA.m}} \label{fig:flow_lambertga}
+\end{figure}

@@ -1,0 +1,28 @@
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}[auto,>=triangle 45]
+    \node [startend] (start) {START};
+    \node [input, below of=start, node distance=2cm] (inputs) {Input parameters:\\
+	planet's gravity parameter;\\
+	arrival velocity at infinity;\\
+	final orbit};
+    \node [block, below of=inputs, node distance=2cm] (pericenter) {Compute final orbit pericenter's\\position and velocity};
+    \node [block, below of=pericenter, node distance=1.8cm] (plane) {Build transfer orbit plane,\\containing the pericenter radius\\and the arrival velocity};
+    \node [block, below of=plane, node distance=2.1cm] (firstminimum) {Shift arrival velocity vector\\in order to obtain an hyperbola\\with the same pericenter distance\\as the final orbit};
+    \node [block, below of=firstminimum, node distance=2cm] (hyperbola) {Compute arrival hyperbola parameters};
+    \node [block, below of=hyperbola] (circular) {Construct a circular orbit\\between the two pericenters};
+    \node [input, below of=circular, node distance=2cm] (output) {Compute and output the $\Delta v$\\required to move from the \\ hyperbola to the circular orbit\\and then to the final orbit};
+    \node [startend, below of=output, node distance=2cm] (end) {END};
+
+    \draw [->] (start) -- (inputs);
+    \draw [->] (inputs) -- (pericenter);
+    \draw [->] (pericenter) -- (plane);
+    \draw [->] (plane) -- (firstminimum);
+    \draw [->] (firstminimum) -- (hyperbola);
+    \draw [->] (hyperbola) -- (circular);
+    \draw [->] (circular) -- (output);
+    \draw [->] (output) -- (end);
+\end{tikzpicture}
+\caption{Flow chart for function \textit{Arrival.m}} \label{fig:flow_arrival}
+\end{figure}

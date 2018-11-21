@@ -1,0 +1,27 @@
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}[auto,>=triangle 45]
+    \node [startend] (start) {START};
+    \node [input, below of=start, node distance=2cm] (definition) {Define problem's variables:\\
+	physical quantities\\
+	porkchop graph limits\\
+	final orbit};
+    \node [input, below of=definition, node distance=2cm] (ephemerides) {Load planets' ephemerides\\using class in Ephemerides.m};
+    \node [block, below of=ephemerides] (firstporkchop) {Generate porkchop graph,\\centered in assigned $t_1$ and $t_3$};
+    \node [block, below of=firstporkchop] (firstminimum) {Evaluate minimum $\Delta v$\\and corresponding $t_1$ and $t_3$};
+    \node [block, below of=firstminimum] (secondporkchop) {Generate porkchop graph,\\zoomed around new $t_1$ and $t_3$};
+    \node [block, below of=secondporkchop] (doagain) {Do again the last two steps};
+    \node [input, below of=doagain] (output) {Print results and plot orbits};
+    \node [startend, below of=output] (end) {END};
+
+    \draw [->] (start) -- (definition);
+    \draw [->] (definition) -- (ephemerides);
+    \draw [->] (ephemerides) -- (firstporkchop);
+    \draw [->] (firstporkchop) -- (firstminimum);
+    \draw [->] (firstminimum) -- (secondporkchop);
+    \draw [->] (secondporkchop) -- (doagain);
+    \draw [->] (doagain) -- (output);
+    \draw [->] (output) -- (end);
+\end{tikzpicture}
+\caption{Flow chart for script \textit{Main.m}} \label{fig:flow_main}
+\end{figure}

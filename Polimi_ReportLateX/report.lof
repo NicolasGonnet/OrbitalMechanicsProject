@@ -1,0 +1,24 @@
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Flow chart for function \textit {PorkchopData.m}\relax }}{5}{figure.caption.6}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Flow chart for script \textit {Main.m}\relax }}{6}{figure.caption.7}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Flow chart for function \textit {Arrival.m}\relax }}{8}{figure.caption.8}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Flow chart for function \textit {LambertGA.m}\relax }}{9}{figure.caption.9}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Porkchop plots with increasing zoom\relax }}{10}{figure.caption.10}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Interplanetary orbits (optimum solution)\relax }}{11}{figure.caption.11}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Planet-centered maneuvers detail\relax }}{11}{figure.caption.12}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Porkchop plots with increasing zoom [no limit on pericenter radius]\relax }}{12}{figure.caption.13}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Interplanetary orbits (optimum solution) [no limit on pericenter radius]\relax }}{13}{figure.caption.14}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Planet-centered maneuvers detail [no limit on pericenter radius]\relax }}{13}{figure.caption.15}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Short period perturbations due to atmospheric drag\relax }}{17}{figure.caption.16}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Short period perturbations due to solar pressure\relax }}{18}{figure.caption.17}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Short period perturbations due to third body presence (Sun $\&$ Moon)\relax }}{19}{figure.caption.18}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Short period perturbations due to first zonal harmonic J2\relax }}{20}{figure.caption.19}
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Long period perturbations due to atmospheric drag\relax }}{22}{figure.caption.20}
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Long period perturbations due to solar pressure\relax }}{23}{figure.caption.21}
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Long period perturbations due to third body presence (Sun $\&$ Moon)\relax }}{24}{figure.caption.22}
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Long period perturbations due to first zonal harmonic J2\relax }}{25}{figure.caption.23}
+\contentsline {figure}{\numberline {2.19}{\ignorespaces Long period perturbations due to overall disturbances\relax }}{26}{figure.caption.24}
+\contentsline {figure}{\numberline {2.20}{\ignorespaces Numerical and analytical variations of $\Omega $ due to first zonal harmonic J2\relax }}{27}{figure.caption.25}
+\contentsline {figure}{\numberline {2.21}{\ignorespaces Numerical and analytical variations of $\omega $ due to first zonal harmonic J2\relax }}{27}{figure.caption.26}

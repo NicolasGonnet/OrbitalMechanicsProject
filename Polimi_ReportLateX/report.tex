@@ -1,0 +1,23 @@
+\documentclass[a4paper,11pt]{report}
+
+\input{packages}
+
+\makeindex
+
+\begin{document}
+
+\input{header}
+
+\input{introduction}
+\input{development}
+
+% \newpage
+% \appendix
+% \chapter{MATLAB code} \label{App:AppendixA}
+
+\newpage
+\addcontentsline{toc}{chapter}{\refname}
+
+\input{bibliography}
+
+\end{document}
